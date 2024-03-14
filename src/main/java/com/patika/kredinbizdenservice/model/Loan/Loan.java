@@ -1,16 +1,17 @@
-package com.patika.kredinbizdenservice.model.loan;
+package com.patika.kredinbizdenservice.model.Loan;
 
 import com.patika.kredinbizdenservice.model.Bank;
 import com.patika.kredinbizdenservice.model.Product;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
 public abstract class Loan implements Product {
 
-    private BigDecimal amount;
-    private Integer installment;
-    private Bank bank;
-    private Double interestRate;
+    @Getter private BigDecimal amount;
+    @Getter private Integer installment;
+    @Getter private Bank bank;
+    @Getter private Double interestRate;
     // private Campaign campaign; // kampanyalı kredileri üstte çıkart
 
     //sponsorlu kampanyaları üstte çıkart
@@ -18,45 +19,17 @@ public abstract class Loan implements Product {
     public Loan() {
     }
 
-    public Loan(BigDecimal amount, Integer installment, Double interestRate) {
+    public Loan(BigDecimal amount, Integer installment, Double interestRate, Bank bank) {
         this.amount = amount;
         this.installment = installment;
         this.interestRate = interestRate;
+        this.bank = bank;
+
+        Bank.addLoan(this);
     }
 
     abstract void calculate(BigDecimal amount, int installment);
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Integer getInstallment() {
-        return installment;
-    }
-
-    public void setInstallment(Integer installment) {
-        this.installment = installment;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public Double getInterestRate() {
-        return interestRate;
-    }
-
-    public void setInterestRate(Double interestRate) {
-        this.interestRate = interestRate;
-    }
 
     @Override
     public String toString() {
