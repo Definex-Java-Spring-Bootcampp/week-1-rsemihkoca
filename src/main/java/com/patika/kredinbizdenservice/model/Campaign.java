@@ -3,6 +3,8 @@ package com.patika.kredinbizdenservice.model;
 import com.patika.kredinbizdenservice.enums.SectorType;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Campaign {
 
