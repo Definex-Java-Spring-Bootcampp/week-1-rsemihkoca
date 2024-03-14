@@ -1,4 +1,4 @@
-package com.patika.kredinbizdenservice.model;
+package com.patika.kredinbizdenservice.model.loan;
 
 
 import com.patika.kredinbizdenservice.enums.LoanType;

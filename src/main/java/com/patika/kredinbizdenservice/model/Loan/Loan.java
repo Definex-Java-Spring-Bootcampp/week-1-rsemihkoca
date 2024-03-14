@@ -1,4 +1,7 @@
-package com.patika.kredinbizdenservice.model;
+package com.patika.kredinbizdenservice.model.loan;
+
+import com.patika.kredinbizdenservice.model.Bank;
+import com.patika.kredinbizdenservice.model.Product;
 
 import java.math.BigDecimal;
 
