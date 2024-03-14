@@ -1,17 +1,26 @@
 package com.patika.kredinbizdenservice.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CreditCard implements Product{
 
     private BigDecimal fee;
-    private List<Campaign> campaignList;
     private Bank bank;
+    @Getter private Set<Campaign> campaignList;
 
-    public CreditCard(BigDecimal fee, List<Campaign> campaignList) {
+    public CreditCard(BigDecimal fee, Set<Campaign> campaignList, Bank bank) {
         this.fee = fee;
         this.campaignList = campaignList;
+        this.bank = bank;
+
+        Bank.addCreditCard(this);
     }
 
     public BigDecimal getFee() {
@@ -20,22 +29,6 @@ public class CreditCard implements Product{
 
     public void setFee(BigDecimal fee) {
         this.fee = fee;
-    }
-
-    public List<Campaign> getCampaignList() {
-        return campaignList;
-    }
-
-    public void setCampaignList(List<Campaign> campaignList) {
-        this.campaignList = campaignList;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
     }
 
     @Override
