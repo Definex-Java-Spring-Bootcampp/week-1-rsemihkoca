@@ -12,20 +12,12 @@ public abstract class Loan implements Product {
     @Getter private Integer installment;
     @Getter private Bank bank;
     @Getter private Double interestRate;
-    // private Campaign campaign; // kampanyalı kredileri üstte çıkart
 
-    //sponsorlu kampanyaları üstte çıkart
-
-    public Loan() {
-    }
-
-    public Loan(BigDecimal amount, Integer installment, Double interestRate, Bank bank) {
+    protected Loan(BigDecimal amount, Integer installment, Double interestRate, Bank bank) {
         this.amount = amount;
         this.installment = installment;
         this.interestRate = interestRate;
         this.bank = bank;
-
-        Bank.addLoan(this);
     }
 
     abstract void calculate(BigDecimal amount, int installment);
