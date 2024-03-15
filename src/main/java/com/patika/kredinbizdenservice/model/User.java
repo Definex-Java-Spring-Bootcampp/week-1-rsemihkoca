@@ -2,13 +2,15 @@ package com.patika.kredinbizdenservice.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class User {
@@ -20,19 +22,11 @@ public class User {
     private String password;
     @Getter @Setter private String phoneNumber;
     @Getter @Setter private Boolean isActive;
-    @Getter @Setter private static List<Application> applicationList = new ArrayList<>();
 
     private static final Set<String> registeredEmails = new HashSet<>();
 
-    public static void addApplication (Application application) {
-        applicationList.add(application);
-    }
 
-    public User(String name, String surname, String email, String password, String phoneNumber, Boolean isActive) {
-        this(name, surname, null, email, password, phoneNumber, isActive);
-    }
-
-    public User(String name,
+    private User(String name,
                 String surname,
                 LocalDate birthDate,
                 String email,
@@ -46,6 +40,17 @@ public class User {
         this.password = setPassword(password);
         this.phoneNumber = phoneNumber;
         this.isActive = isActive;
+    }
+
+    public static User create(
+            String name,
+            String surname,
+            LocalDate birthDate,
+            String email,
+            String password,
+            String phoneNumber,
+            Boolean isActive) {
+        return new User(name, surname, birthDate, email, password, phoneNumber, isActive);
     }
 
     private String setEmail(String email) {
