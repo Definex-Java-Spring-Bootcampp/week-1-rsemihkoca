@@ -13,22 +13,13 @@ public class CreditCard implements Product{
 
     private BigDecimal fee;
     private Bank bank;
-    @Getter private Set<Campaign> campaignList;
 
-    public CreditCard(BigDecimal fee, Set<Campaign> campaignList, Bank bank) {
+    private CreditCard(BigDecimal fee, Set<Campaign> campaignList, Bank bank) {
         this.fee = fee;
         this.campaignList = campaignList;
         this.bank = bank;
 
         Bank.addCreditCard(this);
-    }
-
-    public BigDecimal getFee() {
-        return fee;
-    }
-
-    public void setFee(BigDecimal fee) {
-        this.fee = fee;
     }
 
     @Override
