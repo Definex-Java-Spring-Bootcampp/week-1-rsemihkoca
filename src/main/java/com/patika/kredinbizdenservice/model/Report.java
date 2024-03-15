@@ -6,19 +6,7 @@ import java.util.stream.Collectors;
 
 public class Report {
 
-    /*
-
-        En çok başvuru yapan kullanıcıyı bulan methodu yazın.
-    4. En yüksek kredi isteyen kullanıcıyı ve istediği tutarı bulan methodu yazın.
-    5. Son bir aylık yapılan başvuruları listeleyen methodu yazın.
-    6. Kampanya sayısı en çoktan aza doğru olacak şekilde kredi kartı tekliflerini listeleyen
-    methodu yazın.
-    7. cemdrman@gmail.com mail adresine sahip kullanıcının bütün başvurularını
-    listeleyen methodu yazın.(Parametrik şekilde çalışmalıdır.)
-    */
-
     public static User findMostAppliedUser() {
-        // En çok başvuru yapan kullanıcıyı bulan methodu yazın.
 
         User user = User.getApplicationList()
                 .stream()
@@ -33,7 +21,6 @@ public class Report {
         return user;
     }
 
-    // 4. En yüksek kredili application:
     public static Application findHighestCreditApplication() {
         return User.getApplicationList()
                 .stream()
@@ -41,7 +28,6 @@ public class Report {
                 .get();
     }
 
-    //5. Son bir aylık yapılan başvuruları listeleyen methodu yazın.
     public static List<Application> findLastMonthApplications() {
         return User.getApplicationList()
                 .stream()
@@ -49,8 +35,6 @@ public class Report {
                 .collect(Collectors.toList());
     }
 
-    //  İçindeki Kampanya sayısı en çoktan aza doğru olacak şekilde kredi kartı tekliflerini listeleyen
-    //methodu yazın
     public static List<CreditCard> listCreditCardOffersByCampaignCount() {
         return Bank.getCreditCards()
                 .stream()
@@ -58,7 +42,6 @@ public class Report {
                 .collect(Collectors.toList());
     }
 
-    // 7. List all applications for a given email address
     public static List<Application> listApplicationsByEmail(String email) {
         return User.getApplicationList()
                 .stream()
