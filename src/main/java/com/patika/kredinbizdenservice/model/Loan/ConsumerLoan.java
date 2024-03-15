@@ -13,7 +13,7 @@ public class ConsumerLoan extends Loan {
     @Getter private LoanType loanType = LoanType.IHTIYAC_KREDISI;
     private List<Integer> installmentOptions;
 
-    public ConsumerLoan(BigDecimal amount, Integer installment, Double interestRate, Bank bank) {
+    private ConsumerLoan(BigDecimal amount, Integer installment, Double interestRate, Bank bank) {
         super(amount, installment, interestRate, bank);
     }
 
@@ -21,6 +21,10 @@ public class ConsumerLoan extends Loan {
     @Override
     void calculate(BigDecimal amount, int installment) {
         //tc bul, maaşı bul
+    }
+
+    public static ConsumerLoan create(BigDecimal amount, Integer installment, Double interestRate, Bank bank) {
+        return new ConsumerLoan(amount, installment, interestRate, bank);
     }
 
     public static ConsumerLoan createRandom() {
