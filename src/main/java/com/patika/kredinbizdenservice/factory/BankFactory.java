@@ -1,60 +1,54 @@
 package com.patika.kredinbizdenservice.factory;
 
-import com.patika.kredinbizdenservice.enums.LoanType;
 import com.patika.kredinbizdenservice.model.Bank;
-import com.patika.kredinbizdenservice.model.Loan.ConsumerLoan;
-import com.patika.kredinbizdenservice.model.Loan.HouseLoan;
-import com.patika.kredinbizdenservice.model.Loan.Loan;
-import com.patika.kredinbizdenservice.model.Loan.VehicleLoan;
+import lombok.Getter;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class LoanFactory{
+public class BankFactory {
 
-    private static volatile LoanFactory instance;
-    private List<Loan> loanList = new ArrayList<>();
+    private static volatile BankFactory instance;
+    @Getter private Set<Bank> bankList = new HashSet<>();
 
-    private LoanFactory() {
+
+
+    private BankFactory() {
     }
 
-    public static LoanFactory getInstance() {
+    public static BankFactory getInstance() {
         if (instance == null) {
-            synchronized (LoanFactory.class) {
+            synchronized (BankFactory.class) {
                 if (instance == null) {
-                    instance = new LoanFactory();
+                    instance = new BankFactory();
                 }
             }
         }
         return instance;
     }
 
-    public Loan create(LoanType loanType, BigDecimal amount, Integer installment, Double interestRate, Bank bank) {
-
-        Loan loan = switch (loanType) {
-            case IHTIYAC_KREDISI -> ConsumerLoan.create(amount, installment, interestRate, bank);
-            case KONUT_KREDISI -> HouseLoan.create(amount, installment, interestRate, bank);
-            case ARAC_KREDISI -> VehicleLoan.create(amount, installment, interestRate, bank);
-        };
-
-        loanList.add(loan);
-
-        return loan;
-
+    public Bank create(String name, String location) {
+        Bank bank = Bank.create(name, location);
+        bankList.add(bank);
+        return bank;
     }
 
-    public Loan createRandom(LoanType loanType) {
+    public Bank createRandom() {
+        Bank bank = Bank.createRandom();
 
-        Loan loan = switch (loanType) {
-            case IHTIYAC_KREDISI -> ConsumerLoan.createRandom();
-            case KONUT_KREDISI -> HouseLoan.createRandom();
-            case ARAC_KREDISI -> VehicleLoan.createRandom();
-        };
+        if (bank == null) {
+            return bankList.stream().findAny().orElse(null);
+        }
 
-        loanList.add(loan);
+        bankList.add(bank);
+        return bank;
+    }
 
-        return loan;
-
+    public void createRandomBanks(int count) {
+        for (int i = 0; i < count; i++) {
+            createRandom();
+        }
     }
 }
