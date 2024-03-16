@@ -3,6 +3,7 @@ package com.patika.kredinbizdenservice.model.Loan;
 
 
 import com.patika.kredinbizdenservice.enums.LoanType;
+import com.patika.kredinbizdenservice.factory.BankFactory;
 import com.patika.kredinbizdenservice.model.Bank;
 import lombok.Getter;
 
@@ -33,7 +34,7 @@ public class HouseLoan extends Loan {
         BigDecimal amount = new BigDecimal(random.nextInt(10_000, 10_000_000));
         int installment = random.nextInt(1, 120);
         double interestRate = random.nextDouble();
-        Bank bank = Bank.createRandom();
+        Bank bank = BankFactory.getInstance().createRandom();
         return new HouseLoan(amount, installment, interestRate, bank);
     }
 }
