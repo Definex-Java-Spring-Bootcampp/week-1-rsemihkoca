@@ -1,43 +1,60 @@
 package com.patika.kredinbizdenservice.factory;
 
-import com.patika.kredinbizdenservice.model.User;
+import com.patika.kredinbizdenservice.model.Bank;
+import com.patika.kredinbizdenservice.model.CreditCard;
+import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserFactory {
+public class CreditCardFactory {
 
-    private static volatile UserFactory instance;
-    private List<User> userList = new ArrayList<>();
+    private static volatile CreditCardFactory instance;
+    @Getter private List<CreditCard> creditCardList = new ArrayList<>();
 
-    private UserFactory() {
+    private CreditCardFactory() {
     }
 
-    public static UserFactory getInstance() {
+    public static CreditCardFactory getInstance() {
         if (instance == null) {
-            synchronized (UserFactory.class) {
+            synchronized (CreditCardFactory.class) {
                 if (instance == null) {
-                    instance = new UserFactory();
+                    instance = new CreditCardFactory();
                 }
             }
         }
         return instance;
     }
 
-    public User create(String name,
-                       String surname,
-                       LocalDate birthDate,
-                       String email,
-                       String password,
-                       String phoneNumber,
-                       Boolean isActive) {
+    public CreditCard create(BigDecimal fee, Bank bank) {
 
-        User user = User.create(name, surname, birthDate, email, password, phoneNumber, isActive);
+        CreditCard creditCard = CreditCard.create(fee, bank);
 
-        userList.add(user);
+        bank.addCreditCard(creditCard);
+        creditCardList.add(creditCard);
 
-        return user;
+        return creditCard;
+
+    }
+
+    public CreditCard createRandom() {
+
+        CreditCard creditCard = CreditCard.createRandom();
+
+        creditCard.getBank().addCreditCard(creditCard);
+        creditCardList.add(creditCard);
+
+        return creditCard;
+
+    }
+
+    public void createRandomCreditCards(int count) {
+
+        for (int i = 0; i < count; i++) {
+            createRandom();
+        }
 
     }
 
