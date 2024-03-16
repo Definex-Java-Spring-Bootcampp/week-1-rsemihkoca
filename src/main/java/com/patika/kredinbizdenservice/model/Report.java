@@ -40,29 +40,23 @@ public class Report {
     }
 
     public static List<CreditCard> listCreditCardOffersByCampaignCount() {
-//        return Bank.getCreditCards()
-//                .stream()
-//                .sorted((o1, o2) -> o2.getCampaignList().size() - o1.getCampaignList().size())
-//                .collect(Collectors.toList());
 
-        return CreditCardFactory.getInstance().getCreditCardList()
+        List<CreditCard> creditCardList = CreditCardFactory.getInstance().getCreditCardList()
                 .stream()
                 .sorted((o1, o2) -> o2.getBank().getCampaignList().size() - o1.getBank().getCampaignList().size())
                 .toList();
+        return creditCardList;
 
 
     }
 
     public static List<Application> listApplicationsByEmail(String email) {
-//        return User.getApplicationList()
-//                .stream()
-//                .filter(application -> application.getUser().getEmail().equals(email))
-//                .collect(Collectors.toList());
-//    }
-        return ApplicationFactory.getInstance().getApplicationList()
+
+        List<Application> applicationList = ApplicationFactory.getInstance().getApplicationList()
                 .stream()
                 .filter(application -> application.getUser().getEmail().equals(email))
                 .toList();
+        return applicationList;
     }
 }
 

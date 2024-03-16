@@ -13,6 +13,18 @@ public class BankFactory {
     private static volatile BankFactory instance;
     @Getter private Set<Bank> bankList = new HashSet<>();
 
+    private static List<Bank> initializedBanks = new ArrayList<>(List.of(
+            Bank.create("Garanti", "Istanbul"),
+            Bank.create("Akbank", "Istanbul"),
+            Bank.create("Yapi Kredi", "Istanbul"),
+            Bank.create("Ziraat", "Ankara"),
+            Bank.create("Vakif Bank", "Istanbul"),
+            Bank.create("Halk Bank", "Ankara"),
+            Bank.create("Is Bank", "Istanbul"),
+            Bank.create("TEB", "Istanbul"),
+            Bank.create("QNB Finansbank", "Istanbul"),
+            Bank.create("Deniz Bank", "Istanbul")
+    ));
 
 
     private BankFactory() {
@@ -36,11 +48,7 @@ public class BankFactory {
     }
 
     public Bank createRandom() {
-        Bank bank = Bank.createRandom();
-
-        if (bank == null) {
-            return bankList.stream().findAny().orElse(null);
-        }
+        Bank bank = initializedBanks.get((int) (Math.random() * initializedBanks.size()));
 
         bankList.add(bank);
         return bank;

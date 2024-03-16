@@ -17,19 +17,19 @@ public class Bank {
     private Set<Campaign> campaignList = new HashSet<>();
     /* !!! bankalaarın hem credit cardları var hem de campaignları var*/
 
-    private static List<Bank> initializedBanks = new ArrayList<>(List.of(
-            Bank.create("Garanti", "Istanbul"),
-            Bank.create("Akbank", "Istanbul"),
-            Bank.create("Yapi Kredi", "Istanbul"),
-            Bank.create("Ziraat", "Ankara"),
-            Bank.create("Vakif Bank", "Istanbul"),
-            Bank.create("Halk Bank", "Ankara"),
-            Bank.create("Is Bank", "Istanbul"),
-            Bank.create("TEB", "Istanbul"),
-            Bank.create("QNB Finansbank", "Istanbul"),
-            Bank.create("Deniz Bank", "Istanbul")
-    ));
-    private static Random random = new Random();
+//    private static List<Bank> initializedBanks = new ArrayList<>(List.of(
+//            Bank.create("Garanti", "Istanbul"),
+//            Bank.create("Akbank", "Istanbul"),
+//            Bank.create("Yapi Kredi", "Istanbul"),
+//            Bank.create("Ziraat", "Ankara"),
+//            Bank.create("Vakif Bank", "Istanbul"),
+//            Bank.create("Halk Bank", "Ankara"),
+//            Bank.create("Is Bank", "Istanbul"),
+//            Bank.create("TEB", "Istanbul"),
+//            Bank.create("QNB Finansbank", "Istanbul"),
+//            Bank.create("Deniz Bank", "Istanbul")
+//    ));
+//    private static Random random = new Random();
 
 
 
@@ -60,18 +60,18 @@ public class Bank {
         return new Bank(name, location);
     }
 
-    public static Bank createRandom() {
+//    public static Bank createRandom() {
+//
+//        if (initializedBanks.isEmpty()) {
+//            return null;
+//        } else {
+//            int randomIndex = random.nextInt(initializedBanks.size());
+//            Bank bank = initializedBanks.get(randomIndex);
+//            initializedBanks.remove(randomIndex);
+//            return bank;
+//
+//        }
 
-        if (initializedBanks.isEmpty()) {
-            return null;
-        } else {
-            int randomIndex = random.nextInt(initializedBanks.size());
-            Bank bank = initializedBanks.get(randomIndex);
-            initializedBanks.remove(randomIndex);
-            return bank;
 
-        }
-
-
-    }
+//    }
 }
