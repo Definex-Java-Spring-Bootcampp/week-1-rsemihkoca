@@ -1,7 +1,8 @@
 package com.patika.kredinbizdenservice.model;
 
+
+import com.patika.kredinbizdenservice.factory.BankFactory;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,21 +13,27 @@ import java.util.Set;
 public class CreditCard implements Product{
 
     private BigDecimal fee;
-    private Bank bank;
+    @Getter private Bank bank;
 
-    private CreditCard(BigDecimal fee, Set<Campaign> campaignList, Bank bank) {
+
+    private CreditCard(BigDecimal fee, Bank bank) {
         this.fee = fee;
-        this.campaignList = campaignList;
         this.bank = bank;
+    }
 
-        Bank.addCreditCard(this);
+    public static CreditCard create(BigDecimal fee, Bank bank) {
+        return new CreditCard(fee, bank);
+    }
+
+    public static CreditCard createRandom() {
+        return new CreditCard(BigDecimal.valueOf(100), BankFactory.getInstance().createRandom());
     }
 
     @Override
     public String toString() {
         return "CreditCard{" +
                 "fee=" + fee +
-                ", campaignList=" + campaignList +
+                ", campaignList=" + bank.getCampaignList() +
                 ", bank=" + bank +
                 '}';
     }
