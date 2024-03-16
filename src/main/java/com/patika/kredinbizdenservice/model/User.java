@@ -23,7 +23,12 @@ public class User {
     @Getter @Setter private String phoneNumber;
     @Getter @Setter private Boolean isActive;
 
+    @Getter private Set<Application> applicationList = new HashSet<>();
     private static final Set<String> registeredEmails = new HashSet<>();
+
+    public void addApplication(Application application) {
+        applicationList.add(application);
+    }
 
 
     private User(String name,
