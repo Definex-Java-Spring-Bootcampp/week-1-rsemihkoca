@@ -171,6 +171,7 @@ HTTP Methods, HTTP protokolü üzerinden yapılan isteklerin türlerini belirtir
     - İsmi Cem olup yaşı 30’dan küçük 25’ten büyük müşterilerin toplam alışveriş tutarını hesaplayın,
     - Sistemdeki 1500 TL üzerindeki faturaları listeleyin.
 
+![img_1.png](img_1.png)
 ---
 ***Eğitmen - Cem DIRMAN*  
 *Kolay Gelsin***  
