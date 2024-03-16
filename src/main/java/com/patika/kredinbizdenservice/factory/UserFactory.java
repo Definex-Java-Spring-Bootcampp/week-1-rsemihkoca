@@ -1,6 +1,7 @@
 package com.patika.kredinbizdenservice.factory;
 
 import com.patika.kredinbizdenservice.model.User;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.List;
 public class UserFactory {
 
     private static volatile UserFactory instance;
+
+    @Getter
     private List<User> userList = new ArrayList<>();
 
     private UserFactory() {
