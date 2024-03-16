@@ -38,7 +38,10 @@ public class LoanFactory{
             case ARAC_KREDISI -> VehicleLoan.create(amount, installment, interestRate, bank);
         };
 
+
+        bank.addLoan(loan);
         loanList.add(loan);
+
 
         return loan;
 
@@ -52,6 +55,7 @@ public class LoanFactory{
             case ARAC_KREDISI -> VehicleLoan.createRandom();
         };
 
+        loan.getBank().addLoan(loan);
         loanList.add(loan);
 
         return loan;
