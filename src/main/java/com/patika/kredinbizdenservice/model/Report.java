@@ -1,52 +1,68 @@
 package com.patika.kredinbizdenservice.model;
 
+import com.patika.kredinbizdenservice.factory.ApplicationFactory;
+import com.patika.kredinbizdenservice.factory.CreditCardFactory;
+import com.patika.kredinbizdenservice.factory.UserFactory;
+
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Report {
 
     public static User findMostAppliedUser() {
 
-        User user = User.getApplicationList()
+        User user = UserFactory.getInstance().getUserList()
                 .stream()
-                .collect(Collectors.groupingBy(Application::getUser, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .max((o1, o2) -> o1.getValue().compareTo(o2.getValue()))
-                .get()
-                .getKey();
-
+                .max((o1, o2) -> (int) (o1.getApplicationList().stream().count() - o2.getApplicationList().stream().count()))
+                .get();
 
         return user;
     }
 
     public static Application findHighestCreditApplication() {
-        return User.getApplicationList()
+
+        Application application = ApplicationFactory.getInstance().getApplicationList()
                 .stream()
                 .max((o1, o2) -> o1.getLoan().getAmount().compareTo(o2.getLoan().getAmount()))
                 .get();
+
+        return application;
     }
 
     public static List<Application> findLastMonthApplications() {
-        return User.getApplicationList()
+
+        List<Application> applicationList =  ApplicationFactory.getInstance().getApplicationList()
                 .stream()
                 .filter(application -> application.getLocalDateTime().isAfter(LocalDateTime.now().minusMonths(1)))
-                .collect(Collectors.toList());
+                .toList();
+
+        return applicationList;
     }
 
     public static List<CreditCard> listCreditCardOffersByCampaignCount() {
-        return Bank.getCreditCards()
+//        return Bank.getCreditCards()
+//                .stream()
+//                .sorted((o1, o2) -> o2.getCampaignList().size() - o1.getCampaignList().size())
+//                .collect(Collectors.toList());
+
+        return CreditCardFactory.getInstance().getCreditCardList()
                 .stream()
-                .sorted((o1, o2) -> o2.getCampaignList().size() - o1.getCampaignList().size())
-                .collect(Collectors.toList());
+                .sorted((o1, o2) -> o2.getBank().getCampaignList().size() - o1.getBank().getCampaignList().size())
+                .toList();
+
+
     }
 
     public static List<Application> listApplicationsByEmail(String email) {
-        return User.getApplicationList()
+//        return User.getApplicationList()
+//                .stream()
+//                .filter(application -> application.getUser().getEmail().equals(email))
+//                .collect(Collectors.toList());
+//    }
+        return ApplicationFactory.getInstance().getApplicationList()
                 .stream()
                 .filter(application -> application.getUser().getEmail().equals(email))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
 
